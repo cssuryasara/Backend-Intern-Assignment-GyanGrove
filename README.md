@@ -25,7 +25,7 @@ Express.js,Mongoose
 1. **Clone the repository:**
 
    ```bash
-   git clone [https://github.com/cssuryasara/Backend-Intern-Assignment-GyanGrove.git](https://github.com/cssuryasara/Backend-Intern-Assignment-GyanGrove.git)
+   git clone https://github.com/cssuryasara/Backend-Intern-Assignment-GyanGrove.git
 2. **Install dependencies:**
 
     Open your terminal or command prompt and navigate to the project directory where you cloned the repository. Then, run the following command to install the required dependencies:
@@ -159,4 +159,6 @@ curl -w "\n" "http://localhost:3000/events/find?userLatitude=40.7128&userLongitu
 **Method:** POST
 
 **URL:** `/add`  
+
+<img src="https://github.com/cssuryasara/Backend-Intern-Assignment-GyanGrove/blob/main/screenshots/Screenshot%20(328).png">
 
