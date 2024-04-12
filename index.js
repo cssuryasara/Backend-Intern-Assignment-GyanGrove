@@ -5,7 +5,7 @@ const axios = require("axios");
 require('dotenv').config()
 
 const csvFilePath = "./dataset.csv";
-const mongoUri = "mongodb://localhost:27017/assignment";
+const mongoUri = process.env.MONGODB_URI;
 const mongooseSchemaName = "events";
 
 const eventSchema = new mongoose.Schema({
@@ -131,11 +131,17 @@ const sort = {
     date: 1,
     time: 1,
 };
+
 const app = express();
 
 app.get("/add", async (req, res) => {
-    await importCSVToMongo();
-    res.status(200).send("Success");
+    try {
+        await importCSVToMongo();
+        res.status(200).send("Success");
+    } catch (error) {
+        console.error(error)
+        res.status(500).send("Server Error")
+    }
 });
 
 app.get("/events/find", async (req, res) => {
@@ -147,7 +153,12 @@ app.get("/events/find", async (req, res) => {
 
     getCombinedData(userLatitude, userLongitude, searchDate)
         .then((data) => {
-            res.status(200).send(getPaginatedEvents(data, page, pageSize));
+            if (data.length === 0) {
+                res.status(404).send("No Event Found")
+            }
+            else {
+                res.status(200).send(getPaginatedEvents(data, page, pageSize));
+            }
         })
         .catch((err) => {
             console.error(err);
